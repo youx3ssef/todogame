@@ -1,0 +1,520 @@
+/* Game-themed Task Manager CSS */
+@import url("https://fonts.googleapis.com/css2?family=MedievalSharp&family=Montserrat:wght@400;500;600;700&display=swap");
+
+:root {
+  --primary: #4e54c8;
+  --primary-dark: #363795;
+  --secondary: #8f94fb;
+  --accent: #ffd700;
+  --background: #1a1c2c;
+  --card-bg: #2a2d4a;
+  --text: #ffffff;
+  --text-secondary: #b8b9cf;
+  --success: #00b894;
+  --progress: #fdcb6e;
+  --danger: #d63031;
+  --warning: #e17055;
+  --border-radius: 8px;
+  --shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  --font-game: "MedievalSharp", cursive;
+  --font-main: "Montserrat", sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-main);
+  background-color: var(--background);
+  color: var(--text);
+  line-height: 1.6;
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%232a2d4a' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+.game-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Level up notification */
+.level-up-notification {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, var(--accent), #ff9900);
+  color: #000;
+  padding: 15px 30px;
+  border-radius: var(--border-radius);
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+  text-align: center;
+  z-index: 1000;
+  font-family: var(--font-game);
+}
+
+.level-up-notification h2 {
+  font-size: 28px;
+  margin-bottom: 5px;
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.7);
+}
+
+.confetti-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 999;
+}
+
+/* Game Header */
+.game-header {
+  margin-bottom: 30px;
+}
+
+.player-info {
+  background: linear-gradient(to right, var(--primary-dark), var(--primary));
+  border-radius: var(--border-radius);
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  box-shadow: var(--shadow);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.character-portrait {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid var(--accent);
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+  margin-right: 20px;
+  flex-shrink: 0;
+  background-color: #363795;
+}
+
+.character-portrait img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.player-stats {
+  flex: 1;
+}
+
+.player-stats h2 {
+  font-family: var(--font-game);
+  font-size: 24px;
+  margin-bottom: 10px;
+  color: var(--accent);
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.level-info {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.level-badge {
+  background-color: var(--accent);
+  color: #000;
+  font-weight: bold;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 14px;
+  margin-right: 15px;
+}
+
+.xp-bar-container {
+  flex: 1;
+  height: 15px;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+}
+
+.xp-bar {
+  height: 100%;
+  background: linear-gradient(to right, #4facfe, #00f2fe);
+  border-radius: 10px;
+  transition: width 0.5s ease;
+}
+
+.xp-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 12px;
+  font-weight: 600;
+  color: white;
+  text-shadow: 0 0 3px rgba(0, 0, 0, 0.8);
+}
+
+.stats-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.stat-item {
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.2);
+  padding: 5px 15px;
+  border-radius: var(--border-radius);
+  min-width: 80px;
+}
+
+.stat-value {
+  display: block;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.stat-label {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+/* Game Content */
+.game-content {
+  flex: 1;
+}
+
+.quest-board {
+  background-color: var(--card-bg);
+  border-radius: var(--border-radius);
+  padding: 20px;
+  box-shadow: var(--shadow);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.quest-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.quest-header h2 {
+  font-family: var(--font-game);
+  font-size: 22px;
+  color: var(--accent);
+}
+
+.add-quest-btn {
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.add-quest-btn:hover {
+  background-color: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Add Quest Form */
+.add-quest-form {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: var(--border-radius);
+  padding: 20px;
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 500;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  border-radius: var(--border-radius);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.05);
+  color: var(--text);
+  font-size: 16px;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.2);
+}
+
+.xp-selector {
+  display: flex;
+  gap: 10px;
+}
+
+.xp-selector button {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--border-radius);
+  background-color: rgba(255, 255, 255, 0.05);
+  color: var(--text);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.xp-selector button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.xp-selector button.selected {
+  background-color: var(--accent);
+  color: #000;
+  font-weight: 600;
+}
+
+.submit-quest-btn {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(to right, var(--primary), var(--secondary));
+  color: white;
+  border: none;
+  border-radius: var(--border-radius);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-top: 10px;
+}
+
+.submit-quest-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Quest List */
+.quest-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.empty-quests {
+  text-align: center;
+  padding: 30px;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+.quest-item {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: var(--border-radius);
+  padding: 15px;
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all 0.3s ease;
+}
+
+.quest-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.quest-item.completed {
+  background-color: rgba(0, 184, 148, 0.1);
+  border-color: rgba(0, 184, 148, 0.3);
+}
+
+.quest-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.quest-info {
+  flex: 1;
+}
+
+.quest-info h3 {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.quest-meta {
+  display: flex;
+  gap: 15px;
+}
+
+.quest-xp {
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.quest-time {
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+.quest-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.status-selector select {
+  padding: 6px 10px;
+  border-radius: var(--border-radius);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: rgba(0, 0, 0, 0.2);
+  color: var(--text);
+  cursor: pointer;
+}
+
+.status-selector select:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.status-selector select.status-done {
+  background-color: var(--success);
+  color: white;
+}
+
+.status-selector select.status-progress {
+  background-color: var(--progress);
+  color: #000;
+}
+
+.status-selector select.status-stuck {
+  background-color: var(--warning);
+  color: white;
+}
+
+.status-selector select.status-not-done {
+  background-color: var(--danger);
+  color: white;
+}
+
+.delete-quest-btn {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--text-secondary);
+  border: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 18px;
+  transition: all 0.2s ease;
+}
+
+.delete-quest-btn:hover {
+  background-color: var(--danger);
+  color: white;
+}
+
+.quest-complete-badge {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background-color: var(--success);
+  color: white;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 4px;
+  transform: rotate(5deg);
+}
+
+/* Game Footer */
+.game-footer {
+  margin-top: 30px;
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 14px;
+  padding: 15px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .player-info {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .character-portrait {
+    margin-right: 0;
+    margin-bottom: 15px;
+  }
+
+  .xp-selector {
+    flex-direction: column;
+  }
+
+  .quest-content {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .quest-actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .quest-complete-badge {
+    top: 10px;
+    right: 10px;
+  }
+}
+
+/* Animations */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.level-up-notification {
+  animation: pulse 1s infinite;
+}
+
+/* Hover effects */
+.quest-item:hover .quest-info h3 {
+  color: var(--accent);
+}
+
+.quest-item.completed:hover {
+  background-color: rgba(0, 184, 148, 0.2);
+}
+
